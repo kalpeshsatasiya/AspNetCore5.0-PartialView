@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+@{var message = new Message() { Title = "Tag Message", Content = "Message display from partial tag" };}
+<partial name="_message" model="message" />
+
+
+@{var message1 = new Message() { Title = "Html Helper Message", Content = "Message display from partial async" };}
+@await Html.PartialAsync("_message",
+                                message1,
+                                new ViewDataDictionary(ViewData)
+                                {
+                                    { "index", 1}
+                                })
+
+<br />
+<div id="serverMethod">
+
+</div>
+@section Scripts{
+
+    <script>
+    $(document).ready(function () {
+         $.ajax({
+                    url: '@Url.Action("GetMessagePartial")',
+                    type: 'GET',
+                    cache: false,
+                }).done(function(result) {
+                    $('#serverMethod').html(result);
+                });
+    });
+
+
+    </script>
+}

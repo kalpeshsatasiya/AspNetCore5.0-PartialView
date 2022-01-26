@@ -1,0 +1,14 @@
+﻿@model Message
+
+<div>
+    <h1>@Model.Title</h1>
+
+    <p>
+        @if (ViewData["index"] != null)
+        {
+            <span>Index: @ViewData["index"]</span>
+        }
+        <br />
+        @Model.Content
+    </p>
+</div>
